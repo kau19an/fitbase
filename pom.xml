@@ -6,8 +6,8 @@
 	<artifactId>fitbase</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>FitBase</name>
-	<description>Um projeto acadêmico de gestão de academia em Java e integrado com banco
-		de dados.</description>
+	<description>Um projeto acadêmico de gestão de academia em Java e integrado
+		com banco de dados.</description>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -21,10 +21,18 @@
 		</plugins>
 	</build>
 	<dependencies>
+		<!-- Para integração com o banco de dados -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.7.4</version>
+		</dependency>
+
+		<!-- Para acesso às variáveis de conexão do .env -->
+		<dependency>
+			<groupId>io.github.cdimascio</groupId>
+			<artifactId>dotenv-java</artifactId>
+			<version>3.0.0</version>
 		</dependency>
 	</dependencies>
 </project>
