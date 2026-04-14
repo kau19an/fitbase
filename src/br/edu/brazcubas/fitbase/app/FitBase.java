@@ -1,4 +1,4 @@
-package app;
+package br.edu.brazcubas.fitbase.app;
 
 public class FitBase {
 	public static void main(String[] args) {

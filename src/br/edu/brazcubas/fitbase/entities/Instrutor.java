@@ -1,4 +1,4 @@
-package entities;
+package br.edu.brazcubas.fitbase.entities;
 
 /**
  * @author Kauan Farias
