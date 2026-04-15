@@ -9,10 +9,50 @@ import java.time.LocalDate;
 
 public class Frequencia {
 	private Integer id;
-	
+
 	private LocalDate dataEntrada;
 	private String horaEntrada;
 	private Aluno aluno; // FK: id
-	
-	// ...
+
+	// Construtor
+	public Frequencia(Integer id, LocalDate dataEntrada, String horaEntrada, Aluno aluno) {
+		this.id = id;
+		this.dataEntrada = dataEntrada;
+		this.horaEntrada = horaEntrada;
+		this.aluno = aluno;
+	}
+
+	// Getters
+	public Integer getId() {
+		return id;
+	}
+
+	public LocalDate getDataEntrada() {
+		return dataEntrada;
+	}
+
+	public String getHoraEntrada() {
+		return horaEntrada;
+	}
+
+	public Aluno getAluno() {
+		return aluno;
+	}
+
+	// Setters
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setDataEntrada(LocalDate dataEntrada) {
+		this.dataEntrada = dataEntrada;
+	}
+
+	public void setHoraEntrada(String horaEntrada) {
+		this.horaEntrada = horaEntrada;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
 }
