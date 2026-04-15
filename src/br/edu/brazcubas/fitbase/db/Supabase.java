@@ -6,7 +6,12 @@ import java.sql.SQLException;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-public class DatabaseConnection {
+/**
+ * @author Kauan Farias
+ * @version 1.0
+ */
+
+public class Supabase {
 	// Carrega o arquivo .env na memória
 	private static final Dotenv dotenv = Dotenv.load();
 
