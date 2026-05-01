@@ -5,6 +5,14 @@
 	<groupId>br.edu.brazcubas.fitbase</groupId>
 	<artifactId>fitbase</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<!-- Define que o JVM 21 é o padrão -->
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		
+		<!-- Permite as acentuações do português -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<name>FitBase</name>
 	<description>Um projeto acadêmico de gestão de academia em Java e integrado
 		com banco de dados.</description>
@@ -21,14 +29,14 @@
 		</plugins>
 	</build>
 	<dependencies>
-		<!-- Para integração com o banco de dados -->
+		<!-- Para integração com o banco de dados (Supabase) -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.7.4</version>
 		</dependency>
 
-		<!-- Para acesso às variáveis de conexão do .env -->
+		<!-- Para acesso às variáveis de conexão do arquivo .env -->
 		<dependency>
 			<groupId>io.github.cdimascio</groupId>
 			<artifactId>dotenv-java</artifactId>
