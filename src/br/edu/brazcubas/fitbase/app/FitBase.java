@@ -3,10 +3,11 @@ package br.edu.brazcubas.fitbase.app;
 import java.sql.Connection;
 
 import br.edu.brazcubas.fitbase.db.Supabase;
+import br.edu.brazcubas.fitbase.ui.MenuPrincipal;
 
 /**
  * @author Kauan Farias
- * @version 1.2
+ * @version 1.3
  */
 
 public class FitBase {
@@ -26,7 +27,11 @@ public class FitBase {
 		if (status != true) {
 			System.exit(0);
 		} else {
-			// Menu
+			// 2. Se foi possível conectar, exibe o menu principal
+			System.out.println("\u001B[1;32m[SUCESSO]\u001b[0m Supabase - Conexão estabelecida!\n");
+			
+			MenuPrincipal menu = new MenuPrincipal();
+			menu.iniciar();
 		}
 	}
 }
