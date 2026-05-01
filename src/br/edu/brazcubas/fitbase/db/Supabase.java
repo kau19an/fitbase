@@ -11,6 +11,8 @@ import io.github.cdimascio.dotenv.Dotenv;
  * @version 1.0
  */
 
+// AVISO: O firewall da faculdade bloqueia a porta de acesso ao Supabase. Rode o programa em outra rede.
+
 public class Supabase {
 	// Carrega o arquivo .env na memória
 	private static final Dotenv dotenv = Dotenv.load();
