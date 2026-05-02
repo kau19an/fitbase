@@ -15,7 +15,7 @@ public class Aluno extends Pessoa {
     private LocalDate dataNasc;
     private String email;
     private LocalDate dataMatricula;
-    private Plano plano;
+    private Plano plano; // FK: id
 
     // Construtor
     public Aluno(Integer id,
