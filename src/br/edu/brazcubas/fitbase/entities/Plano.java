@@ -2,7 +2,7 @@ package br.edu.brazcubas.fitbase.entities;
 
 /**
  * @author Kauan Farias
- * @version 1.0
+ * @version 1.1
  */
 
 public class Plano {
@@ -14,7 +14,9 @@ public class Plano {
 	private int duracao;
 	private double valorMensal;
 
-	// Construtor
+	// Construtores
+	public Plano() {}
+	
 	public Plano(Integer id, String nome, String descricao, String beneficios, int duracao, double valorMensal) {
 		this.id = id;
 		this.nome = nome;
