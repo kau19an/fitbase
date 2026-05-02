@@ -32,9 +32,9 @@ public class Aluno extends Pessoa {
         this.plano = plano;
     }
 
-	 @Override
-     public String getNomeCompleto() {
-        return "Aluno: " + super.getNomeCompleto();
+	@Override
+    public String getNomeCompleto() {
+		return "Aluno: " + super.getNomeCompleto();
     }  
 	// Getters
 	public Integer getId() {
