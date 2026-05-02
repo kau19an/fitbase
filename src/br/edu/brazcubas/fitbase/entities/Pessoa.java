@@ -1,46 +1,32 @@
 package br.edu.brazcubas.fitbase.entities;
 
-import java.time.LocalDate;
-
 /**
- * A classe base que vai representar uma pessoa do sistema.
- * Contém informaççoes comuns como nome, cpf e contato.
- * Essa classe será herdada por outras, como Aluno, Instrutor.
- * 
  * @author Breno Christaziano
- * @version 1.0
+ * @author Kauan Farias
+ * @version 1.1
  */
 
 public class Pessoa {
+	protected String primeiroNome;
+	protected String meioNome;
+	protected String ultimoNome;
+	protected String cpf;
+	protected String telefone;
 
-    protected String primeiroNome;
-    protected String meioNome;
-    protected String ultimoNome;
-    protected String cpf;
-    protected String telefone;
+	// Construtores
+	public Pessoa() {
+	}
 
-    public Pessoa(String primeiroNome, String meioNome, String ultimoNome,
-                  String cpf, String telefone){
+	public Pessoa(String primeiroNome, String meioNome, String ultimoNome, String cpf, String telefone) {
+		this.primeiroNome = primeiroNome;
+		this.meioNome = meioNome;
+		this.ultimoNome = ultimoNome;
+		this.cpf = cpf;
+		this.telefone = telefone;
+	}
 
-        this.primeiroNome = primeiroNome;
-        this.meioNome = meioNome;
-        this.ultimoNome = ultimoNome;
-        this.cpf = cpf;
-        this.telefone = telefone;
-    }
-
-     public String getNomeCompleto() {
-        String nome = primeiroNome + " ";
-
-        if (meioNome != null && !meioNome.isEmpty()) {
-            nome += meioNome + " ";
-        }
-
-        nome += ultimoNome;
-
-        return nome;
-    }
-    public String getPrimeiroNome() {
+	// Getters
+	public String getPrimeiroNome() {
 		return primeiroNome;
 	}
 
@@ -52,14 +38,25 @@ public class Pessoa {
 		return ultimoNome;
 	}
 
+	public String getNomeCompleto() {
+		// Se o nome do meio for nulo ou vazio, ignora; senão, o exibe
+		String meio = (meioNome == null || meioNome.trim().isEmpty()) ? "" : meioNome + " ";
+
+		// Junta cada parte do nome, eliminando os espaços antes e depois (se houver)
+		String nomeCompleto = (primeiroNome + " " + meio + ultimoNome).trim();
+
+		return nomeCompleto;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
-	
+
 	public String getTelefone() {
 		return telefone;
 	}
 
+	// Setters
 	public void setPrimeiroNome(String primeiroNome) {
 		this.primeiroNome = primeiroNome;
 	}

@@ -2,7 +2,7 @@ package br.edu.brazcubas.fitbase.entities;
 
 /**
  * @author Kauan Farias
- * @version 1.0
+ * @version 1.1
  */
 
 public class Instrutor extends Pessoa {
@@ -11,8 +11,12 @@ public class Instrutor extends Pessoa {
 	private String especialidade;
 	private String horariosTrabalho;
 
-	// Construtor
-	public Instrutor (Integer id, String primeiroNome, String meioNome, String ultimoNome, String cpf, String telefone,
+	// Construtores
+	public Instrutor() {
+		super();
+	}
+
+	public Instrutor(Integer id, String primeiroNome, String meioNome, String ultimoNome, String cpf, String telefone,
 			String especialidade, String horariosTrabalho) {
 		super(primeiroNome, meioNome, ultimoNome, cpf, telefone);
 
@@ -21,16 +25,10 @@ public class Instrutor extends Pessoa {
 		this.horariosTrabalho = horariosTrabalho;
 	}
 
-	@Override
-    public String getNomeCompleto() {
-        return "Instrutor: " + super.getNomeCompleto();
-    }
-
 	// Getters
 	public Integer getId() {
 		return id;
 	}
-
 
 	public String getEspecialidade() {
 		return especialidade;
@@ -44,7 +42,6 @@ public class Instrutor extends Pessoa {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	public void setEspecialidade(String especialidade) {
 		this.especialidade = especialidade;
