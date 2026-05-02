@@ -2,9 +2,11 @@ package br.edu.brazcubas.fitbase.ui;
 
 import java.util.Scanner;
 
+import br.edu.brazcubas.fitbase.utils.Console;
+
 /**
  * @author Kauan Farias
- * @version 1.0
+ * @version 1.1
  */
 
 public class MenuPrincipal {
@@ -33,16 +35,28 @@ public class MenuPrincipal {
 					menuAluno.exibirMenu();
 				}
 				case 2 -> {
-					MenuAula menuAula = new MenuAula();
-					menuAula.exibirMenu();
+					System.out.println("\n\u001B[1;33m[AVISO]\u001B[0m Essa opção ainda está em construção.");
+					Console.pausar();
+					Console.limpar();
+					
+					// MenuAula menuAula = new MenuAula();
+					// menuAula.exibirMenu();
 				}
 				case 3 -> {
-					MenuInstrutor menuInstrutor = new MenuInstrutor();
-					menuInstrutor.exibirMenu();
+					System.out.println("\n\u001B[1;33m[AVISO]\u001B[0m Essa opção ainda está em construção.");
+					Console.pausar();
+					Console.limpar();
+					
+					// MenuInstrutor menuInstrutor = new MenuInstrutor();
+					// menuInstrutor.exibirMenu();
 				}
 				case 4 -> {
-					MenuPlano menuPlano = new MenuPlano();
-					menuPlano.exibirMenu();
+					System.out.println("\n\u001B[1;33m[AVISO]\u001B[0m Essa opção ainda está em construção.");
+					Console.pausar();
+					Console.limpar();
+					
+					// MenuPlano menuPlano = new MenuPlano();
+					// menuPlano.exibirMenu();
 				}
 				case 0 -> System.out.print("\nPrograma encerrado. Volte sempre!");
 				default -> System.out.println("\u001B[1;31m[ERRO]\u001B[0m Opção inválida. Tente novamente.");
