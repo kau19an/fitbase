@@ -88,7 +88,7 @@ public class Aluno extends Pessoa {
 				- E-mail: %s
 				- Telefone: %s
 				- Data de matrícula: %s
-				------------------------------------------""", id, getNomeCompleto(), cpf,
+				-------------------------------------""", id, getNomeCompleto(), cpf,
 				(dataNasc != null ? dataNasc.format(formato) : "Não informada"), email, telefone,
 				(dataMatricula != null ? dataMatricula.format(formato) : "Não informada"));
 	}
