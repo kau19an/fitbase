@@ -13,7 +13,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 // AVISO: O firewall da faculdade bloqueia a porta de acesso ao Supabase. Rode o programa em outra rede.
 
-public class Supabase {
+public class Database {
 	// Carrega o arquivo .env na memória
 	private static final Dotenv dotenv = Dotenv.load();
 
@@ -27,7 +27,7 @@ public class Supabase {
 		try { // Tenta estabelecer uma conexão com os valores das variáveis
 			return DriverManager.getConnection(URL, USER, PASS);
 		} catch (SQLException e) { // Se não ocorrer bem, lança um erro
-			throw new RuntimeException("\u001B[1;31m[ERRO]\u001B[0m Supabase - Conexão não estabelecida: \u001B[3m"
+			throw new RuntimeException("\u001B[1;31m[ERRO]\u001B[0m Banco de dados - Conexão não estabelecida: \u001B[3m"
 					+ e.getMessage() + "\u001B[0m");
 		}
 	}

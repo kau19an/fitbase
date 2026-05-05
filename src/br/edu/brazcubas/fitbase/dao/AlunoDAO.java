@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.brazcubas.fitbase.db.Supabase;
+import br.edu.brazcubas.fitbase.db.Database;
 import br.edu.brazcubas.fitbase.entities.Aluno;
 import br.edu.brazcubas.fitbase.entities.Plano;
 
@@ -22,7 +22,7 @@ public class AlunoDAO {
 	public void cadastrar(Aluno aluno) {
 		String sql = "INSERT INTO aluno (alu_primeiro_nome, alu_meio_nome, alu_ultimo_nome, alu_cpf, alu_data_nasc, alu_email, alu_telefone, alu_data_matricula, pln_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
-		try (Connection conn = Supabase.getConnection();
+		try (Connection conn = Database.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, aluno.getPrimeiroNome());
 			stmt.setString(2, aluno.getMeioNome());
@@ -46,7 +46,7 @@ public class AlunoDAO {
 		List<Aluno> lista = new ArrayList<>();
 		String sql = "SELECT * FROM aluno ORDER BY alu_id ASC";
 		
-		try (Connection conn = Supabase.getConnection();
+		try (Connection conn = Database.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql);
 				ResultSet rs = stmt.executeQuery()) {
 			while (rs.next()) {
@@ -87,7 +87,7 @@ public class AlunoDAO {
 	public void atualizar(Aluno aluno) {
 		String sql = "UPDATE aluno SET alu_primeiro_nome=?, alu_meio_nome=?, alu_ultimo_nome=?, alu_cpf=?, alu_data_nasc=?, alu_email=?, alu_telefone=?, alu_data_matricula=? WHERE alu_id=?";
 		
-		try (Connection conn = Supabase.getConnection();
+		try (Connection conn = Database.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, aluno.getPrimeiroNome());
 			stmt.setString(2, aluno.getMeioNome());
@@ -110,7 +110,7 @@ public class AlunoDAO {
 	// Excluir aluno
 	public void excluir(int id) {
 		String sql = "DELETE FROM aluno WHERE alu_id=?";
-		try (Connection conn = Supabase.getConnection();
+		try (Connection conn = Database.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setInt(1, id);
 			if (stmt.executeUpdate() > 0) {

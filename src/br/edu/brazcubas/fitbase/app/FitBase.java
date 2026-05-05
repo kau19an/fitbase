@@ -2,7 +2,7 @@ package br.edu.brazcubas.fitbase.app;
 
 import java.sql.Connection;
 
-import br.edu.brazcubas.fitbase.db.Supabase;
+import br.edu.brazcubas.fitbase.db.Database;
 import br.edu.brazcubas.fitbase.ui.MenuPrincipal;
 
 /**
@@ -15,7 +15,7 @@ public class FitBase {
 		// 1. Verifica a conexão com o banco de dados (Supabase)
 		boolean status = false;
 
-		try (Connection conn = Supabase.getConnection()) {
+		try (Connection conn = Database.getConnection()) {
 			if (conn != null) { // Se não retornar nulo, deu certo
 				status = true;
 			}
@@ -28,7 +28,7 @@ public class FitBase {
 			System.exit(0);
 		} else {
 			// 2. Se foi possível conectar, exibe o menu principal
-			System.out.println("\u001B[1;32m[SUCESSO]\u001b[0m Supabase - Conexão estabelecida!\n");
+			System.out.println("\u001B[1;32m[SUCESSO]\u001b[0m Banco de dados - Conexão estabelecida!\n");
 			
 			MenuPrincipal menu = new MenuPrincipal();
 			menu.iniciar();

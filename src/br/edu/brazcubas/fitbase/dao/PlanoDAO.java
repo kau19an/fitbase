@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.brazcubas.fitbase.db.Supabase;
+import br.edu.brazcubas.fitbase.db.Database;
 import br.edu.brazcubas.fitbase.entities.Plano;
 
 /**
@@ -23,7 +23,7 @@ public class PlanoDAO {
 		List<Plano> planos = new ArrayList<>();
 		String sql = "SELECT * FROM plano";
 		
-		try (Connection conn = Supabase.getConnection();
+		try (Connection conn = Database.getConnection();
 	             PreparedStatement stmt = conn.prepareStatement(sql);
 	             ResultSet rs = stmt.executeQuery()) {
 
