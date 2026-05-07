@@ -2,7 +2,7 @@ package br.edu.brazcubas.fitbase.entities;
 
 /**
  * @author Kauan Farias
- * @version 1.1
+ * @version 1.2
  */
 
 public class Instrutor extends Pessoa {
@@ -49,5 +49,18 @@ public class Instrutor extends Pessoa {
 
 	public void setHorariosTrabalho(String horariosTrabalho) {
 		this.horariosTrabalho = horariosTrabalho;
+	}
+
+	@Override
+	public String toString() {
+		// Retorna os dados do instrutor já formatados para exibir na lista
+		return String.format("""
+				[%d] %s
+				- CPF: %s
+				- Telefone: %s
+				- Especialidade: %s
+				- Horário(s) de trabalho: %s
+				-------------------------------------""", id, getNomeCompleto(), cpf, telefone, especialidade,
+				horariosTrabalho);
 	}
 }
