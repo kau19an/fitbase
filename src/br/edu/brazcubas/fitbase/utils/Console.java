@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * @author Kauan Farias
- * @version 1.1
+ * @version 1.2
  */
 
 public class Console {
@@ -20,7 +20,7 @@ public class Console {
 		@SuppressWarnings("resource") // Evita que o aviso da falta de 'sc.close()' apareça
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("\nPressione Enter para continuar...");
+		System.out.println("Pressione Enter para continuar...");
 		sc.nextLine();
 	}
 }

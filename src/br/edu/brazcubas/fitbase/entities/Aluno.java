@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * @author Kauan Farias
  * @author Breno Christaziano
- * @version 1.3
+ * @version 1.4
  */
 
 public class Aluno extends Pessoa {
@@ -88,7 +88,7 @@ public class Aluno extends Pessoa {
 				- E-mail: %s
 				- Telefone: %s
 				- Data de matrícula: %s
-				-------------------------------------""", id, getNomeCompleto(), cpf,
+				\n-----\n""", id, getNomeCompleto(), cpf,
 				(dataNasc != null ? dataNasc.format(formato) : "Não informada"), email, telefone,
 				(dataMatricula != null ? dataMatricula.format(formato) : "Não informada"));
 	}

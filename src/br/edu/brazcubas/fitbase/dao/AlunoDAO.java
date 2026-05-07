@@ -14,7 +14,7 @@ import br.edu.brazcubas.fitbase.entities.Plano;
 
 /**
  * @author Kauan Farias
- * @version 1.0
+ * @version 1.1
  */
 
 public class AlunoDAO {
@@ -29,8 +29,10 @@ public class AlunoDAO {
 			stmt.setString(3, aluno.getUltimoNome());
 			stmt.setString(4, aluno.getCpf());
 			stmt.setDate(5, Date.valueOf(aluno.getDataNasc()));
+			
 			stmt.setString(6, aluno.getEmail());
 			stmt.setString(7, aluno.getTelefone());
+			
 			stmt.setDate(8, Date.valueOf(aluno.getDataMatricula()));
 			stmt.setInt(9, aluno.getPlano().getId());
 			
@@ -113,6 +115,7 @@ public class AlunoDAO {
 		try (Connection conn = Database.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setInt(1, id);
+			
 			if (stmt.executeUpdate() > 0) {
 				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m O aluno foi excluído do banco de dados.");
 			} else {
