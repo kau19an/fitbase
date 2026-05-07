@@ -13,7 +13,7 @@ import br.edu.brazcubas.fitbase.utils.Console;
 
 /**
  * @author Kauan Farias
- * @version 1.1
+ * @version 1.2
  */
 
 public class MenuAluno {
@@ -30,14 +30,18 @@ public class MenuAluno {
 			Console.limpar();
 			
 			System.out.print("""
-					\n---- MENU DO ALUNO ----
-					1) Cadastrar novo aluno
-					2) Listar todos os alunos
-					3) Atualizar aluno
-					4) Excluir aluno
-					0) Voltar
+					|---------------------------|
+					|  ACADEMIA FITBASE: ALUNO  |
+					|---------------------------|
+					| 1) Cadastrar novo aluno   |
+					| 2) Listar todos os alunos |
+					| 3) Atualizar aluno        |
+					| 4) Excluir aluno          |
+					|---------------------------|
+					| Digite 0 para voltar.     |
+					|---------------------------|
 					
-					> Opção escolhida:\s""");
+					> Sua escolha:\s""");
 			
 			try {
                 opcao = Integer.parseInt(sc.nextLine());
@@ -61,29 +65,36 @@ public class MenuAluno {
 	
 	// Cadastrar aluno
 	private void cadastrar() {
-		System.out.print("\n---- NOVO CADASTRO DE ALUNO ----\n");
+		Console.limpar();
+		
+		System.out.print("""
+				|------------------------|
+				|    ACADEMIA FITBASE    |
+				| Cadastrando novo aluno |
+				|------------------------|
+				""");
 		Aluno aluno = new Aluno();
 		
-		System.out.print("\n> Primeiro nome: ");
+		System.out.print("\nDigite o primeiro nome:\n> ");
 		aluno.setPrimeiroNome(sc.nextLine());
 		
-		System.out.print("\n> Nome do meio (se não houver, pressione Enter): ");
+		System.out.print("\nDigite o nome do meio (se houver):\n> ");
 		aluno.setMeioNome(sc.nextLine());
 		
-		System.out.print("\n> Último nome: ");
+		System.out.print("\nDigite o último nome:\n> ");
 		aluno.setUltimoNome(sc.nextLine());
 		
-		System.out.print("\n> CPF (somente números): ");
+		System.out.print("\nDigite o CPF (somente números):\n> ");
 		aluno.setCpf(sc.nextLine());
 		
-		System.out.print("\n> Data de nascimento (DD/MM/AAAA, inclua as barras): ");
+		System.out.print("\nDigite a data de nascimento (DD/MM/AAAA, inclua as barras):\n> ");
 		String dataNascString = sc.nextLine();
 		aluno.setDataNasc(LocalDate.parse(dataNascString, formato));
 		
-		System.out.print("\n> E-mail: ");
+		System.out.print("\nDigite o e-mail:\n> ");
 		aluno.setEmail(sc.nextLine());
 		
-		System.out.print("\n> Telefone (somente números): ");
+		System.out.print("\nDigite o telefone (somente números):\n> ");
 		aluno.setTelefone(sc.nextLine());
 		
 		// Define automaticamente o dia atual
@@ -91,21 +102,26 @@ public class MenuAluno {
 		
 		// Lista todos os planos disponíveis
 		PlanoDAO planoDAO = new PlanoDAO();
-	    List<Plano> planos = planoDAO.listar();
+	    List<Plano> planos = planoDAO.listarTodos();
 		
-	    if (planos.isEmpty()) { // Se não houver planos:
+	    if (planos.isEmpty()) {
 	        System.out.println("\u001B[1;33m[AVISO]\u001B[0m Nenhum plano encontrado no banco de dados. Cadastre um antes de continuar.");
 	        Console.pausar();
 	        return;
 	    }
 	    
-	    System.out.println("\n---- PLANOS DISPONÍVEIS ----");
+	    System.out.println("""
+	    		|-----------------------------|
+	    		|       ACADEMIA FITBASE      |
+	    		| Lista de planos disponíveis |
+	    		|-----------------------------|
+	    		""");
 	    for (int i = 0; i < planos.size(); i++) {
 	        Plano p = planos.get(i);
 	        System.out.printf("[%d] %s\n", p.getId(), p.getNome());
 	    }
 	    
-	    System.out.print("\n> Digite o ID do plano: ");
+	    System.out.print("\nDigite o ID do plano:\n> ");
 	    try {
 	    	int idPlano = Integer.parseInt(sc.nextLine());
 	    	
@@ -119,18 +135,25 @@ public class MenuAluno {
 	        return;
 	    }
 	    
-		System.out.println("\nEnviando os dados recebidos...");
+		System.out.println("\n\u001B[1m[INFO]\u001B[0m Enviando os dados recebidos...");
 		dao.cadastrar(aluno);
 		Console.pausar();
 	}
 	
 	// Listar todos os alunos
 	private void listar() {
-		System.out.println("\n---- LISTA DE ALUNOS CADASTRADOS ----");
+		Console.limpar();
+		
+		System.out.println("""
+				|-----------------------------|
+				|       ACADEMIA FITBASE      |
+				| Lista de alunos cadastrados |
+				|-----------------------------|
+				""");
 		List<Aluno> lista = dao.listarTodos();
 		
 		if (lista.isEmpty()) {
-            System.out.println("Nenhum aluno foi encontrado.");
+            System.out.println("\u001B[1;33m[AVISO]\u001B[0m Nenhum aluno foi encontrado.");
         } else {
             for (Aluno a : lista) {
                 System.out.println(a.toString());
@@ -141,43 +164,50 @@ public class MenuAluno {
 	
 	// Atualizar aluno
 	private void atualizar() {
-		System.out.println("\n---- ATUALIZAÇÃO DE ALUNO ----");
-		System.out.print("> Digite o ID do aluno: ");
+		Console.limpar();
+		
+		System.out.println("""
+				|----------------------------|
+				|      ACADEMIA FITBASE      |
+				| Atualizando dados do aluno |
+				|----------------------------|
+				""");
+		System.out.print("Digite o ID do aluno a ser atualizado:\n> ");
 		
 		try {
 	        int id = Integer.parseInt(sc.nextLine());
 	        Aluno aluno = new Aluno();
 	        aluno.setId(id);
 	        
-	        System.out.println("\nDigite os novos dados ou repita os atuais:");
+	        System.out.println("\n\u001B[1m[INFO]\u001B[0m Você pode digitar os novos dados ou repetir os atuais.");
 	        
-	        System.out.print("> Primeiro nome: ");
+	        System.out.print("\nPrimeiro nome:\n> ");
 			aluno.setPrimeiroNome(sc.nextLine());
 			
-			System.out.print("\n> Nome do meio (se não houver, pressione Enter): ");
+			System.out.print("\nNome do meio (se houver):\n> ");
 			aluno.setMeioNome(sc.nextLine());
 			
-			System.out.print("\n> Último nome: ");
+			System.out.print("\nÚltimo nome:\n> ");
 			aluno.setUltimoNome(sc.nextLine());
 			
-			System.out.print("\n> CPF (somente números): ");
+			System.out.print("\nCPF (somente números):\n> ");
 			aluno.setCpf(sc.nextLine());
 			
-			System.out.print("\n> Data de nascimento (DD/MM/AAAA, inclua as barras): ");
+			System.out.print("\nData de nascimento (DD/MM/AAAA, inclua as barras):\n> ");
 			String dataNascString = sc.nextLine();
 			aluno.setDataNasc(LocalDate.parse(dataNascString, formato));
 			
-			System.out.print("\n> E-mail: ");
+			System.out.print("\nE-mail:\n> ");
 			aluno.setEmail(sc.nextLine());
 			
-			System.out.print("\n> Telefone (somente números): ");
+			System.out.print("\nTelefone (somente números):\n> ");
 			aluno.setTelefone(sc.nextLine());
 			
-			System.out.print("\n> Data de matrícula (DD/MM/AAAA, inclua as barras): ");
+			System.out.print("\nData de matrícula (DD/MM/AAAA, inclua as barras):\n> ");
 	        String dataMatrString = sc.nextLine();
 	        aluno.setDataMatricula(LocalDate.parse(dataMatrString, formato));
 			
-			System.out.println("\nEnviando os dados recebidos...");
+			System.out.println("\n\u001B[1m[INFO]\u001B[0m Enviando os dados recebidos...");
 			dao.atualizar(aluno);
 		} catch (NumberFormatException e) {
 	        System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID inválido. Tente novamente.");
@@ -189,14 +219,21 @@ public class MenuAluno {
 	
 	// Excluir aluno
 	private void excluir() {
-		System.out.println("\n---- EXCLUSÃO DE ALUNO ----");
-		System.out.print("> Digite o ID do aluno: ");
+		Console.limpar();
+		
+		System.out.println("""
+				|--------------------|
+				|  ACADEMIA FITBASE  |
+				| Excluindo um aluno |
+				|--------------------|
+				""");
+		System.out.print("Digite o ID do aluno a ser excluído:\n> ");
 		
 		try {
             int id = Integer.parseInt(sc.nextLine());
             dao.excluir(id);
         } catch (NumberFormatException e) {
-            System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID invalido. Tente novamente.");
+            System.out.println("\n\u001B[1;31m[ERRO]\u001B[0m ID inválido. Insira somente números.\n");
         }
 		Console.pausar();
 	}
