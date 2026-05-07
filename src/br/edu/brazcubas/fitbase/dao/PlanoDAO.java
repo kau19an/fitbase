@@ -13,7 +13,7 @@ import br.edu.brazcubas.fitbase.entities.Plano;
 /**
  * @author Kauan Farias
  * @author Breno Christaziano
- * @version 1.1
+ * @version 1.2
  */
 
 public class PlanoDAO {
@@ -29,8 +29,8 @@ public class PlanoDAO {
 			stmt.setDouble(5, plano.getValorMensal());
 
 			stmt.execute();
-			System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m O plano\"" + plano.getNome()
-					+ "\" foi cadastrado no banco de dados.");
+			System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m O plano \"" + plano.getNome()
+					+ "\" foi cadastrado.");
 		} catch (SQLException e) {
 			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao cadastrar plano: " + e.getMessage());
 		}
@@ -79,7 +79,7 @@ public class PlanoDAO {
 
 			if (stmt.executeUpdate() > 0) {
 				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m O plano \"" + plano.getNome()
-						+ "\" foi atualizado no banco de dados.");
+						+ "\" foi atualizado.");
 			}
 		} catch (SQLException e) {
 			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao atualizar plano: " + e.getMessage());
@@ -95,7 +95,7 @@ public class PlanoDAO {
 			stmt.setInt(1, id);
 
 			if (stmt.executeUpdate() > 0) {
-				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m O plano foi excluído do banco de dados.");
+				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m O plano foi excluído.");
 			} else {
 				System.out.println("\u001B[1;33m[AVISO]\u001B[0m ID não encontrado. Tente novamente.");
 			}

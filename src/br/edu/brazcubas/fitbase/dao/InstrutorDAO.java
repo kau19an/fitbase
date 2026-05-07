@@ -12,7 +12,8 @@ import br.edu.brazcubas.fitbase.entities.Instrutor;
 
 /**
  * @author Breno Christaziano
- * @version 1.0
+ * @author Kauan Farias
+ * @version 1.1
  */
 
 public class InstrutorDAO {
@@ -34,7 +35,7 @@ public class InstrutorDAO {
 			System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m " + instrutor.getPrimeiroNome()
 					+ " foi cadastrado(a) no banco de dados.");
 		} catch (SQLException e) {
-			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao cadastrar instrutor: " + e.getMessage());
+			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao cadastrar instrutor(a): " + e.getMessage());
 		}
 	}
 
@@ -85,11 +86,11 @@ public class InstrutorDAO {
 			stmt.setInt(8, instrutor.getId());
 
 			if (stmt.executeUpdate() > 0) {
-				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m " + instrutor.getPrimeiroNome()
-						+ " foi atualizado(a) no banco de dados.");
+				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m O(A) instrutor(a) \"" + instrutor.getPrimeiroNome()
+						+ "\" foi atualizado(a).");
 			}
 		} catch (SQLException e) {
-			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao atualizar instrutor: " + e.getMessage());
+			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao atualizar instrutor(a): " + e.getMessage());
 		}
 	}
 
@@ -102,12 +103,12 @@ public class InstrutorDAO {
 			stmt.setInt(1, id);
 
 			if (stmt.executeUpdate() > 0) {
-				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m O instrutor foi excluído do banco de dados.");
+				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m O(A) instrutor(a) foi excluído(a).");
 			} else {
 				System.out.println("\u001B[1;33m[AVISO]\u001B[0m ID não encontrado. Tente novamente.");
 			}
 		} catch (SQLException e) {
-			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao excluir instrutor: " + e.getMessage());
+			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao excluir instrutor(a): " + e.getMessage());
 		}
 	}
 }

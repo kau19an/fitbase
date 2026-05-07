@@ -12,7 +12,7 @@ import br.edu.brazcubas.fitbase.utils.Console;
 
 /**
  * @author Kauan Farias
- * @version 1.0
+ * @version 1.1
  */
 
 public class MenuFrequencia {
@@ -29,14 +29,18 @@ public class MenuFrequencia {
 			Console.limpar();
 			
 			System.out.print("""
-					\n---- MENU DA FREQUÊNCIA ----
-					1) Cadastrar nova frequência
-					2) Listar todas as frequências
-					3) Atualizar frequência
-					4) Excluir frequência
-					0) Voltar
+					|--------------------------------|
+					|  ACADEMIA FITBASE: FREQUÊNCIA  |
+					|--------------------------------|
+					| 1) Registrar nova frequência   |
+					| 2) Listar todas as frequências |
+					| 3) Atualizar frequência        |
+					| 4) Excluir frequência          |
+					|--------------------------------|
+					| Digite 0 para voltar.          |
+					|--------------------------------|
 					
-					> Opção escolhida:\s""");
+					> Sua escolha:\s""");
 			
 			try {
                 opcao = Integer.parseInt(sc.nextLine());
@@ -51,7 +55,7 @@ public class MenuFrequencia {
 				case 4 -> excluir();
 				case 0 -> { Console.limpar(); } // Menu principal
 				default -> {
-					System.out.println("\u001B[1;31m[ERRO]\u001B[0m Opção inválida. Tente novamente.");
+					System.out.println("\u001B[1;31m[ERRO]\u001B[0m Opção inválida. Tente novamente.\n");
                     Console.pausar();
                 }
 			}
@@ -60,10 +64,17 @@ public class MenuFrequencia {
 	
 	// Cadastrar frequência
 	private void cadastrar() {
-		System.out.println("\n---- NOVO CADASTRO DE FREQUÊNCIA ----");
+		Console.limpar();
+		
+		System.out.print("""
+				|------------------------------|
+				| ACADEMIA FITBASE: FREQUÊNCIA |
+				|    Registrando frequência    |
+				|------------------------------|
+				""");
 		Frequencia frequencia = new Frequencia();
 		
-		System.out.print("\n> ID do aluno: ");
+		System.out.print("\nDigite o ID do(a) aluno(a) que receberá a frequência:\n> ");
 		
 		try {
 			int idAluno = Integer.parseInt(sc.nextLine());
@@ -73,44 +84,52 @@ public class MenuFrequencia {
 			aluno.setId(idAluno);
 			frequencia.setAluno(aluno);
 		} catch (NumberFormatException e) {
-			System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID do aluno inválido. Tente novamente.");
+			System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID do(a) aluno(a) inválido. Tente novamente.\n");
 			Console.pausar();
 			return; // Cancela se for digitado letra em vez de número
 		}
 		
-		System.out.print("\n> Data de entrada (DD/MM/AAAA, inclua as barras): ");
+		System.out.print("\nDigite a data de entrada (DD/MM/AAAA, inclua as barras):\n> ");
 		String dataString = sc.nextLine();
 		frequencia.setDataEntrada(LocalDate.parse(dataString, formato));
 				
-		System.out.print("\n> Hora de entrada (HH:MM): ");
+		System.out.print("\nDigite a hora de entrada (HH:MM):\n> ");
 		frequencia.setHoraEntrada(sc.nextLine());
 		
-		System.out.println("\nEnviando os dados recebidos...");
+		System.out.println("\n\u001B[1m[INFO]\u001B[0m Enviando os dados recebidos...\n");
 		dao.cadastrar(frequencia);
+		
 		Console.pausar();
 	}
 	
 	// Listar todas as frequências
 	private void listar() {
-		System.out.println("\n---- LISTA DE FREQUÊNCIAS ----");
-		System.out.print("> ID do aluno: ");
+		Console.limpar();
+		
+		System.out.println("""
+				|----------------------------------|
+				|   ACADEMIA FITBASE: FREQUÊNCIA   |
+				| Lista de frequências cadastradas |
+				|----------------------------------|
+				""");
+		System.out.print("Digite o ID do(a) aluno(a) que deseja visualizar:\n> ");
 		
 		try {
 			int aluId = Integer.parseInt(sc.nextLine());
 			List<Frequencia> lista = dao.listarTodas(aluId);
 			
 			if (lista.isEmpty()) {
-				System.out.println("\u001B[1;33m[AVISO]\u001B[0m Nenhuma frequência encontrada para este aluno.");
+				System.out.println("\u001B[1;33m[AVISO]\u001B[0m Nenhuma frequência encontrada para este(a) aluno(a).\n");
 			} else {
 				String nome = lista.get(0).getAluno().getNomeCompleto();
 				
-				System.out.println("\n---- FREQUÊNCIAS DE " + nome.toUpperCase() + " ----");
+				System.out.println("\n--> FREQUÊNCIAS DE " + nome.toUpperCase() + " <--");
 				for (Frequencia f : lista) {
 					System.out.println(f.toString());
 				}
 			}
 		} catch (NumberFormatException e) {
-			System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID inválido. Tente novamente.");
+			System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID inválido. Tente novamente.\n");
 		}
 		
 		Console.pausar();
@@ -118,8 +137,15 @@ public class MenuFrequencia {
 	
 	// Atualizar frequência
 	private void atualizar() {
-		System.out.println("\n---- ATUALIZAÇÃO DE FREQUÊNCIA ----");
-		System.out.print("> ID do aluno: ");
+		Console.limpar();
+		
+		System.out.println("""
+				|---------------------------------|
+				|   ACADEMIA FITBASE: FREQUÊNCIA  |
+				|      Atualizando frequência     |
+				|---------------------------------|
+				""");
+		System.out.print("Digite o ID do(a) aluno(a) a ser atualizado(a):\n> ");
 		
 		try {
 			int idAluno = Integer.parseInt(sc.nextLine());
@@ -127,7 +153,7 @@ public class MenuFrequencia {
 			// 1. Busca as frequências desse aluno
 			List<Frequencia> lista = dao.listarTodas(idAluno);
 			if (lista.isEmpty()) {
-				System.out.println("\u001B[1;33m[AVISO]\u001B[0m Nenhuma frequência encontrada para este aluno.");
+				System.out.println("\u001B[1;33m[AVISO]\u001B[0m Nenhuma frequência encontrada para este(a) aluno(a).\n");
 				Console.pausar();
 				return;
 			}
@@ -135,13 +161,13 @@ public class MenuFrequencia {
 			// 2. Lista suas frequências para referência
 			String nome = lista.get(0).getAluno().getNomeCompleto();
 			
-			System.out.println("\n---- FREQUÊNCIAS DE " + nome.toUpperCase() + " ----");
+			System.out.println("\n--> FREQUÊNCIAS DE " + nome.toUpperCase() + " <--");
 			for (Frequencia f : lista) {
 				System.out.println(f.toString());
 			}
 			
-			// 3. Pergunta quais das listadas acima deseja excluir
-			System.out.print("\n> ID da frequência: ");
+			// 3. Pergunta quais das listadas acima deseja atualizar
+			System.out.print("\nDigite o ID da frequência a ser atualizada:\n> ");
 			int idFreq = Integer.parseInt(sc.nextLine());
 			
 			// 4. Confirmação pelo bem da segurança
@@ -154,7 +180,7 @@ public class MenuFrequencia {
 			}
 			
 			if (!pertenceAoAluno) {
-				System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID não existe ou não pertence a este aluno.");
+				System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID não existe ou não pertence a este(a) aluno(a).\n");
 				Console.pausar();
 				return;
 			}
@@ -168,21 +194,21 @@ public class MenuFrequencia {
 			aluno.setId(idAluno);
 			frequencia.setAluno(aluno);
 			
-			System.out.println("\nDigite os novos dados ou repita os atuais:");
+			System.out.println("\n\u001B[1m[INFO]\u001B[0m Você pode digitar os novos dados ou repetir os atuais.");
 			
-			System.out.print("\n> Data de entrada (DD/MM/AAAA, inclua as barras): ");
+			System.out.print("\nData de entrada (DD/MM/AAAA, inclua as barras):\n> ");
 			String dataString = sc.nextLine();
 			frequencia.setDataEntrada(LocalDate.parse(dataString, formato));
 			
-			System.out.print("\n> Hora de entrada (HH:MM): ");
+			System.out.print("\nHora de entrada (HH:MM):\n> ");
 			frequencia.setHoraEntrada(sc.nextLine());
 			
-			System.out.println("\nEnviando os dados recebidos...");
+			System.out.println("\n\u001B[1m[INFO]\u001B[0m Enviando os dados recebidos...\n");
 			dao.atualizar(frequencia);
 		} catch (NumberFormatException e) {
-	        System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID inválido. Tente novamente.");
+	        System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID inválido. Tente novamente.\n");
 	    } catch (Exception e) {
-	        System.out.println("\u001B[1;31m[ERRO]\u001B[0m Erro ao atualizar frequência: " + e.getMessage());
+	        System.out.println("\u001B[1;31m[ERRO]\u001B[0m Erro ao atualizar frequência: " + e.getMessage() + "\n");
 	    }
 		
 		Console.pausar();
@@ -190,8 +216,15 @@ public class MenuFrequencia {
 	
 	// Excluir frequência
 	private void excluir() {
-		System.out.println("\n---- EXCLUSÃO DE FREQUÊNCIA ----");
-		System.out.print("\n> ID do aluno: ");
+		Console.limpar();
+		
+		System.out.println("""
+				|------------------------------|
+				| ACADEMIA FITBASE: FREQUÊNCIA |
+				|     Excluindo frequência     |
+				|------------------------------|
+				""");
+		System.out.print("\nDigite o ID do(a) aluno(a) a ter sua frequência excluída:\n> ");
 		
 		try {
 			// 1. Busca e lista as frequências desse aluno
@@ -199,20 +232,20 @@ public class MenuFrequencia {
 			
 			List<Frequencia> lista = dao.listarTodas(idAluno);
 			if (lista.isEmpty()) {
-				System.out.println("\u001B[1;33m[AVISO]\u001B[0m Nenhuma frequência encontrada para este aluno.");
+				System.out.println("\u001B[1;33m[AVISO]\u001B[0m Nenhuma frequência encontrada para este(a) aluno(a).\n");
 				Console.pausar();
 				return; // Se não tiver o que excluir, volta
 			}
 			
 			String nome = lista.get(0).getAluno().getNomeCompleto();
 			
-			System.out.println("\n---- FREQUÊNCIAS DE " + nome.toUpperCase() + " ----");
+			System.out.println("\n--> FREQUÊNCIAS DE " + nome.toUpperCase() + " <--");
 			for (Frequencia f : lista) {
 				System.out.println(f.toString());
 			}
 			
 			// 2. Pergunta quais das listadas acima deseja excluir
-			System.out.print("\n> ID da frequência: ");
+			System.out.print("\nDigite o ID da frequência a ser excluída:\n> ");
 			int idFreq = Integer.parseInt(sc.nextLine());
 			
 			// 3. Confirmação pelo bem da segurança
@@ -227,10 +260,10 @@ public class MenuFrequencia {
 			if (pertenceAoAluno) {
 				dao.excluir(idFreq);
 			} else {
-				System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID não existe ou não pertence a este aluno.");
+				System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID não existe ou não pertence a este(a) aluno(a).\n");
 			}
 		} catch (NumberFormatException e) {
-			System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID invalido. Tente novamente.");
+			System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID invalido. Tente novamente.\n");
         }
 		
 		Console.pausar();

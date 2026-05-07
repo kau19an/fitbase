@@ -2,7 +2,7 @@ package br.edu.brazcubas.fitbase.entities;
 
 /**
  * @author Kauan Farias
- * @version 1.2
+ * @version 1.3
  */
 
 public class Instrutor extends Pessoa {
@@ -60,7 +60,7 @@ public class Instrutor extends Pessoa {
 				- Telefone: %s
 				- Especialidade: %s
 				- Horário(s) de trabalho: %s
-				-------------------------------------""", id, getNomeCompleto(), cpf, telefone, especialidade,
+				\n-----\n""", id, getNomeCompleto(), cpf, telefone, especialidade,
 				horariosTrabalho);
 	}
 }

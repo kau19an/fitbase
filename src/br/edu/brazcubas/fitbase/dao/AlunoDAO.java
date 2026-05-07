@@ -14,7 +14,7 @@ import br.edu.brazcubas.fitbase.entities.Plano;
 
 /**
  * @author Kauan Farias
- * @version 1.1
+ * @version 1.2
  */
 
 public class AlunoDAO {
@@ -37,9 +37,9 @@ public class AlunoDAO {
 			stmt.setInt(9, aluno.getPlano().getId());
 			
 			stmt.execute();
-			System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m " + aluno.getPrimeiroNome() + " foi cadastrado(a) no banco de dados.");
+			System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m O(A) aluno(a) \"" + aluno.getPrimeiroNome() + "\" foi cadastrado(a).");
 		} catch (SQLException e) {
-			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao cadastrar aluno: " + e.getMessage());
+			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao cadastrar aluno(a): " + e.getMessage());
 		}
 	}
 
@@ -102,10 +102,10 @@ public class AlunoDAO {
 			stmt.setInt(9, aluno.getId());
 			
 			if (stmt.executeUpdate() > 0) {
-				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m " + aluno.getPrimeiroNome() + " foi atualizado(a) no banco de dados.");
+				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m O(A) aluno(a) \"" + aluno.getPrimeiroNome() + "\" foi atualizado(a).");
 			}
 		} catch (SQLException e) {
-			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao atualizar aluno: " + e.getMessage());
+			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao atualizar aluno(a): " + e.getMessage());
 		}
 	}
 	
@@ -117,12 +117,12 @@ public class AlunoDAO {
 			stmt.setInt(1, id);
 			
 			if (stmt.executeUpdate() > 0) {
-				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m O aluno foi excluído do banco de dados.");
+				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m O(A) aluno(a) foi excluído(a).");
 			} else {
 				System.out.println("\u001B[1;33m[AVISO]\u001B[0m ID não encontrado. Tente novamente.");
 			}
 		} catch (SQLException e) {
-			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao excluir aluno: " + e.getMessage());
+			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao excluir aluno(a): " + e.getMessage());
 		}
 	}
 }

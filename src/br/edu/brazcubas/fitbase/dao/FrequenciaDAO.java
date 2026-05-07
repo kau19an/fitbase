@@ -14,7 +14,8 @@ import br.edu.brazcubas.fitbase.entities.Frequencia;
 
 /**
  * @author Breno Christaziano
- * @version 1.0
+ * @author Kauan Farias
+ * @version 1.1
  */
 
 public class FrequenciaDAO {
@@ -29,8 +30,7 @@ public class FrequenciaDAO {
 			stmt.setInt(3, frequencia.getAluno().getId());
 
 			stmt.execute();
-			System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m Frequência registrada para o aluno de ID: "
-					+ frequencia.getAluno().getId());
+			System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m A frequência foi registrada.");
 		} catch (SQLException e) {
 			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao cadastrar frequência: " + e.getMessage());
 		}
@@ -89,7 +89,7 @@ public class FrequenciaDAO {
 			stmt.setInt(4, frequencia.getId());
 
 			if (stmt.executeUpdate() > 0) {
-				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m A frequência foi atualizada no banco de dados.");
+				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m A frequência foi atualizada.");
 			}
 		} catch (SQLException e) {
 			System.out.println("\u001B[1;31m[ERRO]\u001B[0m Falha ao atualizar frequência: " + e.getMessage());
@@ -105,7 +105,7 @@ public class FrequenciaDAO {
 			stmt.setInt(1, id);
 
 			if (stmt.executeUpdate() > 0) {
-				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m A frequência foi excluída do banco de dados.");
+				System.out.println("\u001B[1;32m[SUCESSO]\u001B[0m A frequência foi excluída.");
 			} else {
 				System.out.println("\u001B[1;33m[AVISO]\u001B[0m ID não encontrado. Tente novamente.");
 			}

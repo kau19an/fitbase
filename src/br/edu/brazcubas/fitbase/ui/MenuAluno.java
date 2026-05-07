@@ -13,7 +13,7 @@ import br.edu.brazcubas.fitbase.utils.Console;
 
 /**
  * @author Kauan Farias
- * @version 1.2
+ * @version 1.3
  */
 
 public class MenuAluno {
@@ -56,7 +56,7 @@ public class MenuAluno {
 				case 4 -> excluir();
 				case 0 -> { Console.limpar(); } // Menu principal
 				default -> {
-					System.out.println("\u001B[1;31m[ERRO]\u001B[0m Opção inválida. Tente novamente.");
+					System.out.println("\u001B[1;31m[ERRO]\u001B[0m Opção inválida. Tente novamente.\n");
                     Console.pausar();
                 }
 			}
@@ -68,10 +68,10 @@ public class MenuAluno {
 		Console.limpar();
 		
 		System.out.print("""
-				|------------------------|
-				|    ACADEMIA FITBASE    |
-				| Cadastrando novo aluno |
-				|------------------------|
+				|-------------------------|
+				| ACADEMIA FITBASE: ALUNO |
+				|    Cadastrando aluno    |
+				|-------------------------|
 				""");
 		Aluno aluno = new Aluno();
 		
@@ -105,14 +105,14 @@ public class MenuAluno {
 	    List<Plano> planos = planoDAO.listarTodos();
 		
 	    if (planos.isEmpty()) {
-	        System.out.println("\u001B[1;33m[AVISO]\u001B[0m Nenhum plano encontrado no banco de dados. Cadastre um antes de continuar.");
+	        System.out.println("\u001B[1;33m[AVISO]\u001B[0m É necessário que pelo menos um plano exista no banco de dados. Cadastre um antes de continuar.\n");
 	        Console.pausar();
 	        return;
 	    }
 	    
 	    System.out.println("""
 	    		|-----------------------------|
-	    		|       ACADEMIA FITBASE      |
+	    		|   ACADEMIA FITBASE: ALUNO   |
 	    		| Lista de planos disponíveis |
 	    		|-----------------------------|
 	    		""");
@@ -130,13 +130,14 @@ public class MenuAluno {
 	    	
 	        aluno.setPlano(planoEscolhido);
 	    } catch (NumberFormatException e) {
-	        System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID do plano inválido.");
+	        System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID do plano inválido.\n");
 	        Console.pausar();
 	        return;
 	    }
 	    
-		System.out.println("\n\u001B[1m[INFO]\u001B[0m Enviando os dados recebidos...");
+		System.out.println("\n\u001B[1m[INFO]\u001B[0m Enviando os dados recebidos...\n");
 		dao.cadastrar(aluno);
+		
 		Console.pausar();
 	}
 	
@@ -146,19 +147,20 @@ public class MenuAluno {
 		
 		System.out.println("""
 				|-----------------------------|
-				|       ACADEMIA FITBASE      |
+				|   ACADEMIA FITBASE: ALUNO   |
 				| Lista de alunos cadastrados |
 				|-----------------------------|
 				""");
 		List<Aluno> lista = dao.listarTodos();
 		
 		if (lista.isEmpty()) {
-            System.out.println("\u001B[1;33m[AVISO]\u001B[0m Nenhum aluno foi encontrado.");
+            System.out.println("\u001B[1;33m[AVISO]\u001B[0m Nenhum aluno foi encontrado.\n");
         } else {
             for (Aluno a : lista) {
                 System.out.println(a.toString());
             }
         }
+		
 		Console.pausar();
 	}
 	
@@ -168,11 +170,11 @@ public class MenuAluno {
 		
 		System.out.println("""
 				|----------------------------|
-				|      ACADEMIA FITBASE      |
-				| Atualizando dados do aluno |
+				|   ACADEMIA FITBASE: ALUNO  |
+				|      Atualizando dados     |
 				|----------------------------|
 				""");
-		System.out.print("Digite o ID do aluno a ser atualizado:\n> ");
+		System.out.print("Digite o ID do(a) aluno(a) a ser atualizado(a):\n> ");
 		
 		try {
 	        int id = Integer.parseInt(sc.nextLine());
@@ -207,13 +209,14 @@ public class MenuAluno {
 	        String dataMatrString = sc.nextLine();
 	        aluno.setDataMatricula(LocalDate.parse(dataMatrString, formato));
 			
-			System.out.println("\n\u001B[1m[INFO]\u001B[0m Enviando os dados recebidos...");
+			System.out.println("\n\u001B[1m[INFO]\u001B[0m Enviando os dados recebidos...\n");
 			dao.atualizar(aluno);
 		} catch (NumberFormatException e) {
-	        System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID inválido. Tente novamente.");
+	        System.out.println("\u001B[1;31m[ERRO]\u001B[0m ID inválido. Tente novamente.\n");
 	    } catch (Exception e) {
-	        System.out.println("\u001B[1;31m[ERRO]\u001B[0m Erro ao atualizar aluno: " + e.getMessage());
+	        System.out.println("\u001B[1;31m[ERRO]\u001B[0m Erro ao atualizar aluno(a): " + e.getMessage() + "\n");
 	    }
+		
 		Console.pausar();
 	}
 	
@@ -222,12 +225,12 @@ public class MenuAluno {
 		Console.limpar();
 		
 		System.out.println("""
-				|--------------------|
-				|  ACADEMIA FITBASE  |
-				| Excluindo um aluno |
-				|--------------------|
+				|-------------------------|
+				| ACADEMIA FITBASE: ALUNO |
+				|     Excluindo aluno     |
+				|-------------------------|
 				""");
-		System.out.print("Digite o ID do aluno a ser excluído:\n> ");
+		System.out.print("Digite o ID do(a) aluno(a) a ser excluído(a):\n> ");
 		
 		try {
             int id = Integer.parseInt(sc.nextLine());
@@ -235,6 +238,7 @@ public class MenuAluno {
         } catch (NumberFormatException e) {
             System.out.println("\n\u001B[1;31m[ERRO]\u001B[0m ID inválido. Insira somente números.\n");
         }
+		
 		Console.pausar();
 	}
 }
