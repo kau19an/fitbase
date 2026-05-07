@@ -6,7 +6,7 @@ import br.edu.brazcubas.fitbase.utils.Console;
 
 /**
  * @author Kauan Farias
- * @version 1.1
+ * @version 1.2
  */
 
 public class MenuPrincipal {
@@ -17,15 +17,20 @@ public class MenuPrincipal {
 		
 		do {
 			System.out.print("""
-					Seja bem-vindo(a) ao sistema da academia Fitbase.
-					> Escolha qual entidade deseja acessar abaixo.
+					|-----------------------|
+					|    ACADEMIA FITBASE   |
+					| O que deseja acessar? |
+					|-----------------------|
+					| 1) Aluno              |
+					| 2) Aula               |
+					| 3) Frequência         |
+					| 4) Instrutor          |
+					| 5) Plano              |
+					|-----------------------|
+					| Digite 0 para sair.   |
+					|-----------------------|
 					
-					1) Aluno
-					2) Aula
-					3) Instrutor
-					4) Plano
-					0) Sair
-					>\s""");
+					> Sua escolha:\s""");
 			opcao = sc.nextInt();
 			sc.nextLine();
 			
@@ -43,23 +48,22 @@ public class MenuPrincipal {
 					// menuAula.exibirMenu();
 				}
 				case 3 -> {
-					System.out.println("\n\u001B[1;33m[AVISO]\u001B[0m Essa opção ainda está em construção.");
-					Console.pausar();
-					Console.limpar();
-					
-					// MenuInstrutor menuInstrutor = new MenuInstrutor();
-					// menuInstrutor.exibirMenu();
+					MenuFrequencia menuFrequencia = new MenuFrequencia();
+					menuFrequencia.exibirMenu();
 				}
 				case 4 -> {
-					System.out.println("\n\u001B[1;33m[AVISO]\u001B[0m Essa opção ainda está em construção.");
-					Console.pausar();
-					Console.limpar();
-					
-					// MenuPlano menuPlano = new MenuPlano();
-					// menuPlano.exibirMenu();
+					MenuInstrutor menuInstrutor = new MenuInstrutor();
+					menuInstrutor.exibirMenu();
 				}
-				case 0 -> System.out.print("\nPrograma encerrado. Volte sempre!");
-				default -> System.out.println("\u001B[1;31m[ERRO]\u001B[0m Opção inválida. Tente novamente.");
+				case 5 -> {
+					MenuPlano menuPlano = new MenuPlano();
+					menuPlano.exibirMenu();
+				}
+				case 0 -> System.out.println("\n\u001B[1m[INFO]\u001B[0m Programa encerrado. Volte sempre!");
+				default -> {
+					Console.limpar();
+					System.out.println("\n\u001B[1;31m[ERRO]\u001B[0m Opção não existe. Tente novamente.\n");
+				}
 			}
 		} while (opcao != 0);
 	}
