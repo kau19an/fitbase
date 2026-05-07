@@ -1,10 +1,11 @@
 package br.edu.brazcubas.fitbase.entities;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author Kauan Farias
- * @version 1.0
+ * @version 1.1
  */
 
 public class Frequencia {
@@ -14,7 +15,10 @@ public class Frequencia {
 	private String horaEntrada;
 	private Aluno aluno; // FK: id
 
-	// Construtor
+	// Construtores
+	public Frequencia() {
+	}
+
 	public Frequencia(Integer id, LocalDate dataEntrada, String horaEntrada, Aluno aluno) {
 		this.id = id;
 		this.dataEntrada = dataEntrada;
@@ -54,5 +58,17 @@ public class Frequencia {
 
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
+	}
+
+	@Override
+	public String toString() {
+		// Para que a data seja exibida no formato usado no Brasil
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+		// Retorna os dados da frequência já formatados para exibir na lista
+		return String.format("""
+				[ID: %d] Entrada: %s às %s
+				-------------------------------------""", id,
+				(dataEntrada != null ? dataEntrada.format(formato) : "Não informada"), horaEntrada);
 	}
 }
