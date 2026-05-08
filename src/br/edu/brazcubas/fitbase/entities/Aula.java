@@ -2,7 +2,7 @@ package br.edu.brazcubas.fitbase.entities;
 
 /**
  * @author Kauan Farias
- * @version 1.0
+ * @version 1.1
  */
 
 public class Aula {
@@ -15,7 +15,10 @@ public class Aula {
 	private int duracao;
 	private Instrutor instrutor; // FK: id
 
-	// Construtor
+	// Construtores
+	public Aula() {
+	}
+	
 	public Aula(Integer id, String nome, String descricao, int capacidadeMax, String horario, int duracao,
 			Instrutor instrutor) {
 		this.id = id;
@@ -83,5 +86,17 @@ public class Aula {
 
 	public void setInstrutor(Instrutor instrutor) {
 		this.instrutor = instrutor;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("""
+				[%d] %s
+				- Descrição: "%s"
+				- Capacidade máxima: %d aluno(s)
+				- Horário: %s
+				- Duração: %d
+				- Instrutor(a): %s
+				\n-----\n""", id, nome, descricao, capacidadeMax, horario, duracao, instrutor.getNomeCompleto());
 	}
 }
