@@ -6,7 +6,7 @@ import br.edu.brazcubas.fitbase.utils.Console;
 
 /**
  * @author Kauan Farias
- * @version 1.2
+ * @version 1.3
  */
 
 public class MenuPrincipal {
@@ -40,12 +40,8 @@ public class MenuPrincipal {
 					menuAluno.exibirMenu();
 				}
 				case 2 -> {
-					System.out.println("\n\u001B[1;33m[AVISO]\u001B[0m Essa opção ainda está em construção.");
-					Console.pausar();
-					Console.limpar();
-					
-					// MenuAula menuAula = new MenuAula();
-					// menuAula.exibirMenu();
+					MenuAula menuAula = new MenuAula();
+					menuAula.exibirMenu();
 				}
 				case 3 -> {
 					MenuFrequencia menuFrequencia = new MenuFrequencia();
