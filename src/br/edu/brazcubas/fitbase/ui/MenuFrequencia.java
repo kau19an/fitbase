@@ -12,7 +12,7 @@ import br.edu.brazcubas.fitbase.utils.Console;
 
 /**
  * @author Kauan Farias
- * @version 1.1
+ * @version 1.2
  */
 
 public class MenuFrequencia {
@@ -96,7 +96,7 @@ public class MenuFrequencia {
 		System.out.print("\nDigite a hora de entrada (HH:MM):\n> ");
 		frequencia.setHoraEntrada(sc.nextLine());
 		
-		System.out.println("\n\u001B[1m[INFO]\u001B[0m Enviando os dados recebidos...\n");
+		System.out.println("\n\u001B[1m[INFO]\u001B[0m Enviando os dados recebidos...");
 		dao.cadastrar(frequencia);
 		
 		Console.pausar();
@@ -161,13 +161,13 @@ public class MenuFrequencia {
 			// 2. Lista suas frequências para referência
 			String nome = lista.get(0).getAluno().getNomeCompleto();
 			
-			System.out.println("\n--> FREQUÊNCIAS DE " + nome.toUpperCase() + " <--");
+			System.out.println("\n--- FREQUÊNCIAS DE " + nome.toUpperCase() + " ---");
 			for (Frequencia f : lista) {
 				System.out.println(f.toString());
 			}
 			
 			// 3. Pergunta quais das listadas acima deseja atualizar
-			System.out.print("\nDigite o ID da frequência a ser atualizada:\n> ");
+			System.out.print("Digite o ID da frequência a ser atualizada:\n> ");
 			int idFreq = Integer.parseInt(sc.nextLine());
 			
 			// 4. Confirmação pelo bem da segurança
@@ -224,7 +224,7 @@ public class MenuFrequencia {
 				|     Excluindo frequência     |
 				|------------------------------|
 				""");
-		System.out.print("\nDigite o ID do(a) aluno(a) a ter sua frequência excluída:\n> ");
+		System.out.print("Digite o ID do(a) aluno(a) a ter sua frequência excluída:\n> ");
 		
 		try {
 			// 1. Busca e lista as frequências desse aluno
@@ -239,7 +239,7 @@ public class MenuFrequencia {
 			
 			String nome = lista.get(0).getAluno().getNomeCompleto();
 			
-			System.out.println("\n--> FREQUÊNCIAS DE " + nome.toUpperCase() + " <--");
+			System.out.println("\n--- FREQUÊNCIAS DE " + nome.toUpperCase() + " ---");
 			for (Frequencia f : lista) {
 				System.out.println(f.toString());
 			}

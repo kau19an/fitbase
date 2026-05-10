@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * @author Kauan Farias
- * @version 1.2
+ * @version 1.3
  */
 
 public class Frequencia {
@@ -67,8 +67,7 @@ public class Frequencia {
 
 		// Retorna os dados da frequência já formatados para exibir na lista
 		return String.format("""
-				[ID: %d] Entrada: %s às %s
-				\n-----\n""", id,
+				[ID: %d] Entrada: %s às %s""", id,
 				(dataEntrada != null ? dataEntrada.format(formato) : "Não informada"), horaEntrada);
 	}
 }

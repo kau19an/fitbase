@@ -2,7 +2,7 @@ package br.edu.brazcubas.fitbase.entities;
 
 /**
  * @author Kauan Farias
- * @version 1.3
+ * @version 1.4
  */
 
 public class Plano {
@@ -81,12 +81,10 @@ public class Plano {
 	public String toString() {
 		// Retorna os dados do plano já formatados para exibir na lista
 		return String.format("""
-				[%d] %s
+				[%d] %s (R$%.2f/mês)
 				- Descrição: "%s"
 				- Benefícios: %s
-				- Duração: %d mês(es)
-				- Valor mensal: R$%.2f
-				\n-----\n""", id, getNome(), getDescricao(), getBeneficios(), getDuracao(),
-				getValorMensal());
+				- Duração: %d meses
+				\n-----\n""", id, getNome(), getValorMensal(), getDescricao(), getBeneficios(), getDuracao());
 	}
 }
