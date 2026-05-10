@@ -2,15 +2,16 @@ package br.edu.brazcubas.fitbase.entities;
 
 /**
  * @author Kauan Farias
- * @version 1.3
+ * @version 1.4
  */
 
 public class Instrutor extends Pessoa {
 	private Integer id;
-
 	private String especialidade;
 	private String horariosTrabalho;
-
+	private int qtdAlunos;
+    private String aulasMinistradas;
+	
 	// Construtores
 	public Instrutor() {
 		super();
@@ -38,6 +39,14 @@ public class Instrutor extends Pessoa {
 		return horariosTrabalho;
 	}
 
+	public int getQtdAlunos() {
+        return qtdAlunos;
+    }
+    
+    public String getAulasMinistradas() {
+        return aulasMinistradas;
+    }
+	
 	// Setters
 	public void setId(Integer id) {
 		this.id = id;
@@ -50,6 +59,14 @@ public class Instrutor extends Pessoa {
 	public void setHorariosTrabalho(String horariosTrabalho) {
 		this.horariosTrabalho = horariosTrabalho;
 	}
+	
+	public void setQtdAlunos(int qtdAlunos) {
+        this.qtdAlunos = qtdAlunos;
+    }
+
+    public void setAulasMinistradas(String aulasMinistradas) {
+        this.aulasMinistradas = aulasMinistradas;
+    }
 
 	@Override
 	public String toString() {
@@ -60,7 +77,9 @@ public class Instrutor extends Pessoa {
 				- Telefone: %s
 				- Especialidade: %s
 				- Horário(s) de trabalho: %s
+				- Aulas ministradas: %s
+				- Total de alunos atendidos: %s
 				\n-----\n""", id, getNomeCompleto(), cpf, telefone, especialidade,
-				horariosTrabalho);
+				horariosTrabalho, (aulasMinistradas != null ? aulasMinistradas : "Nenhuma"), qtdAlunos);
 	}
 }

@@ -14,7 +14,7 @@ import br.edu.brazcubas.fitbase.entities.Plano;
 
 /**
  * @author Kauan Farias
- * @version 1.2
+ * @version 1.3
  */
 
 public class AlunoDAO {
@@ -46,7 +46,25 @@ public class AlunoDAO {
 	// Listar todos os alunos
 	public List<Aluno> listarTodos() {
 		List<Aluno> lista = new ArrayList<>();
-		String sql = "SELECT * FROM aluno ORDER BY alu_id ASC";
+		
+		String sql = """
+				SELECT a.*, p.pln_nome, p.pln_duracao,
+			       COALESCE(STRING_AGG(DISTINCT au.aul_nome, ', '), 'Nenhuma') as aulas_matriculadas,
+			       COUNT(DISTINCT f.frq_id) as total_visitas,
+			       MAX(f.frq_data_entrada) as ultima_visita,
+			       CASE
+			         WHEN (a.alu_data_matricula + (p.pln_duracao * interval '1 month')) >= CURRENT_DATE THEN 'Ativo'
+			         ELSE 'Vencido'
+			       END as status_plano,
+			       (a.alu_data_matricula + (p.pln_duracao * interval '1 month')) as data_vencimento
+				FROM aluno a
+				JOIN plano p ON a.pln_id = p.pln_id
+				LEFT JOIN inscricao_aula ia ON a.alu_id = ia.alu_id
+				LEFT JOIN aula au ON ia.aul_id = au.aul_id
+				LEFT JOIN frequencia f ON a.alu_id = f.alu_id
+				GROUP BY a.alu_id, p.pln_nome, p.pln_duracao
+				ORDER BY a.alu_primeiro_nome ASC
+				""";
 		
 		try (Connection conn = Database.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql);
@@ -60,21 +78,32 @@ public class AlunoDAO {
 				aluno.setUltimoNome(rs.getString("alu_ultimo_nome"));
 				
 				aluno.setCpf(rs.getString("alu_cpf"));
-				
-				if (rs.getDate("alu_data_nasc") != null) {
-					aluno.setDataNasc(rs.getDate("alu_data_nasc").toLocalDate());
-				}
+				aluno.setDataNasc(rs.getDate("alu_data_nasc").toLocalDate());
 				
 				aluno.setEmail(rs.getString("alu_email"));
 				aluno.setTelefone(rs.getString("alu_telefone"));
 				
-				if (rs.getDate("alu_data_matricula") != null) {
-					aluno.setDataMatricula(rs.getDate("alu_data_matricula").toLocalDate());
-				}
+				aluno.setDataMatricula(rs.getDate("alu_data_matricula").toLocalDate());
 				
 				Plano plano = new Plano();
 				plano.setId(rs.getInt("pln_id"));
+				plano.setNome(rs.getString("pln_nome"));
 				aluno.setPlano(plano);
+				
+				aluno.setInfoAulas(rs.getString("aulas_matriculadas"));
+			    aluno.setTotalVisitas(rs.getInt("total_visitas"));
+			    
+			    Date dataUltima = rs.getDate("ultima_visita");
+			    if (dataUltima != null) {
+			        aluno.setUltimaVisita(dataUltima.toLocalDate());
+			    }
+			    
+			    aluno.setStatusPlano(rs.getString("status_plano"));
+
+			    Date dataVenc = rs.getDate("data_vencimento");
+			    if (dataVenc != null) {
+			        aluno.setDataVencimento(dataVenc.toLocalDate());
+			    }
 				
 				lista.add(aluno);
 			}

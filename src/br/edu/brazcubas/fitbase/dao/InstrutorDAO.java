@@ -13,7 +13,7 @@ import br.edu.brazcubas.fitbase.entities.Instrutor;
 /**
  * @author Breno Christaziano
  * @author Kauan Farias
- * @version 1.1
+ * @version 1.2
  */
 
 public class InstrutorDAO {
@@ -42,7 +42,16 @@ public class InstrutorDAO {
 	// Listar todos os instrutores
 	public List<Instrutor> listarTodos() {
 		List<Instrutor> lista = new ArrayList<>();
-		String sql = "SELECT * FROM instrutor ORDER BY ins_id ASC";
+		String sql = """
+				SELECT i.*, 
+			       COUNT(DISTINCT ia.alu_id) as total_alunos_atendidos,
+			       COALESCE(STRING_AGG(DISTINCT au.aul_nome, ' | '), 'Nenhuma') as aulas_ministradas
+				FROM instrutor i
+				LEFT JOIN aula au ON i.ins_id = au.ins_id
+				LEFT JOIN inscricao_aula ia ON au.aul_id = ia.aul_id
+				GROUP BY i.ins_id
+				ORDER BY i.ins_primeiro_nome ASC
+				""";
 
 		try (Connection conn = Database.getConnection();
 				PreparedStatement stmt = conn.prepareStatement(sql);
@@ -60,6 +69,9 @@ public class InstrutorDAO {
 
 				instrutor.setEspecialidade(rs.getString("ins_especialidade"));
 				instrutor.setHorariosTrabalho(rs.getString("ins_horarios_trabalho"));
+				
+				instrutor.setQtdAlunos(rs.getInt("total_alunos_atendidos"));
+				instrutor.setAulasMinistradas(rs.getString("aulas_ministradas"));
 
 				lista.add(instrutor);
 			}

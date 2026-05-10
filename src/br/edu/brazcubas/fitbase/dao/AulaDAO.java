@@ -13,7 +13,7 @@ import br.edu.brazcubas.fitbase.entities.Instrutor;
 
 /**
  * @author Kauan Farias
- * @version 1.0
+ * @version 1.1
  */
 
 public class AulaDAO {
@@ -41,10 +41,16 @@ public class AulaDAO {
 	public List<Aula> listarTodos() {
 		List<Aula> lista = new ArrayList<>();
 		String sql = """
-				SELECT au.*, i.ins_primeiro_nome, i.ins_meio_nome, i.ins_ultimo_nome
+				SELECT au.*, i.ins_primeiro_nome, i.ins_meio_nome, i.ins_ultimo_nome,
+			       CASE 
+			         WHEN COUNT(ia.alu_id) = 0 THEN '0' 
+			         ELSE CAST(COUNT(ia.alu_id) AS VARCHAR) 
+			       END as total_alunos
 				FROM aula au
 				INNER JOIN instrutor i ON au.ins_id = i.ins_id
-				ORDER BY au.aul_horario ASC
+				LEFT JOIN inscricao_aula ia ON au.aul_id = ia.aul_id
+				GROUP BY au.aul_id, i.ins_id
+				ORDER BY au.aul_horario ASC;
 				""";
 		
 		try (Connection conn = Database.getConnection();
@@ -67,8 +73,10 @@ public class AulaDAO {
 				instrutor.setPrimeiroNome(rs.getString("ins_primeiro_nome"));
 				instrutor.setMeioNome(rs.getString("ins_meio_nome"));
 				instrutor.setUltimoNome(rs.getString("ins_ultimo_nome"));
-				
 				aula.setInstrutor(instrutor);
+				
+				aula.setTotalInscritos(rs.getString("total_alunos"));
+				
 				lista.add(aula);
 			}
 		} catch (SQLException e) {
