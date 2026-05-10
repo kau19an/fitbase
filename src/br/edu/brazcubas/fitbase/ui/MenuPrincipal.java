@@ -6,7 +6,7 @@ import br.edu.brazcubas.fitbase.utils.Console;
 
 /**
  * @author Kauan Farias
- * @version 1.3
+ * @version 1.4
  */
 
 public class MenuPrincipal {
@@ -19,13 +19,14 @@ public class MenuPrincipal {
 			System.out.print("""
 					|-----------------------|
 					|    ACADEMIA FITBASE   |
-					| O que deseja acessar? |
+					|  O que deseja fazer?  |
 					|-----------------------|
 					| 1) Aluno              |
-					| 2) Aula               |
-					| 3) Frequência         |
-					| 4) Instrutor          |
-					| 5) Plano              |
+					|    2) Matrícula       |
+					|    3) Frequência      |
+					| 4) Aula               |
+					| 5) Instrutor          |
+					| 6) Plano              |
 					|-----------------------|
 					| Digite 0 para sair.   |
 					|-----------------------|
@@ -40,18 +41,22 @@ public class MenuPrincipal {
 					menuAluno.exibirMenu();
 				}
 				case 2 -> {
-					MenuAula menuAula = new MenuAula();
-					menuAula.exibirMenu();
+					MenuInscricao menuInscricao = new MenuInscricao();
+					menuInscricao.exibirMenu();
 				}
 				case 3 -> {
 					MenuFrequencia menuFrequencia = new MenuFrequencia();
 					menuFrequencia.exibirMenu();
 				}
 				case 4 -> {
+					MenuAula menuAula = new MenuAula();
+					menuAula.exibirMenu();
+				}
+				case 5 -> {
 					MenuInstrutor menuInstrutor = new MenuInstrutor();
 					menuInstrutor.exibirMenu();
 				}
-				case 5 -> {
+				case 6 -> {
 					MenuPlano menuPlano = new MenuPlano();
 					menuPlano.exibirMenu();
 				}
