@@ -3,10 +3,10 @@ package br.edu.brazcubas.fitbase.entities;
 /**
  * @author Breno Christaziano
  * @author Kauan Farias
- * @version 1.1
+ * @version 1.2
  */
 
-public class Pessoa {
+public abstract class Pessoa {
 	protected String primeiroNome;
 	protected String meioNome;
 	protected String ultimoNome;
